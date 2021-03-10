@@ -40,5 +40,29 @@ FROM Album al
     ORDER BY Title;
 
 --Task Seven Using the INSERT statement, add one of your favorite artists to the Artist table.
+INSERT INTO Artist (ArtistName, YearEstablished) VALUES ('SQL', 2020);
 
+--Task Eight Using the INSERT statement, add one, or more, albums by your artist to the Album table.
+INSERT  INTO Album (Title, ReleaseDate, AlbumLength, Label, ArtistId, GenreId) 
+VALUES ('The SQL Album', '11/14/2020', 2268, 'Def Jam', 28, 15);
 
+--Task Nine Using the INSERT statement, add some songs that are on that album to the Song table.
+INSERT INTO Song (Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId) VALUES ('Intro to SQL', 100, '12/03/2021', 15, 28, 23);
+
+--Task Ten Write a SELECT query that provides the song titles, album title, and artist name for all of the data you just entered in. Use the LEFT JOIN keyword sequence to connect the tables, and the WHERE keyword to filter the results to the album and artist you added.
+SELECT s.Title AS SongTitle, al.Title AS AlbumTitle, ar.ArtistName
+  FROM song s
+       join Album al ON s.AlbumId = al.id
+       join artist ar ON s.ArtistId = ar.id
+ WHERE s.Title = 'Intro to SQL' 
+       or s.Title = 'Legs'
+       or ar.ArtistName = 'Black Flag'
+
+--Task Eleven Write a SELECT statement to display how many songs exist for each album. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+SELECT count(s.id) AS NumOfSong, al.Title
+  FROM  song s LEFT JOIN album al on s.AlbumId = al.id
+GROUP BY al.Title
+
+--Task Twelve Write a SELECT statement to display how many songs exist for each artist. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+
+--Task Thirteen Write a SELECT statement to display how many songs exist for each genre. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
